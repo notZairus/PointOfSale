@@ -33,10 +33,48 @@ namespace randomshit
 
         system_cofig config = new system_cofig();
 
+        private void LoadColors()
+        {
+            Color color = config.getColorScheme();
+            Color fontColor = config.getFontColor();
+
+            panel1.BackColor = color;
+            label18.ForeColor = fontColor;
+
+            guna2Button1.CheckedState.BorderColor = color;
+            guna2Button1.CheckedState.CustomBorderColor = color;
+
+            guna2Button2.CheckedState.BorderColor = color;
+            guna2Button2.CheckedState.CustomBorderColor = color;
+
+            guna2Button3.CheckedState.BorderColor = color;
+            guna2Button3.CheckedState.CustomBorderColor = color;
+
+            guna2Button8.CheckedState.BorderColor = color;
+            guna2Button8.CheckedState.CustomBorderColor = color;
+
+            updatebtn.FillColor = color;
+            updatebtn.ForeColor = fontColor;
+
+            guna2ShadowPanel8.FillColor = color;
+            guna2ShadowPanel7.FillColor = color;
+            guna2ShadowPanel4.FillColor = color;
+            guna2ShadowPanel5.FillColor = color;
+            guna2ShadowPanel3.FillColor = color;
+            guna2ShadowPanel1.FillColor = color;
+
+            label6.ForeColor = fontColor;
+            label10.ForeColor = fontColor;
+            label8.ForeColor = fontColor;
+            label3.ForeColor = fontColor;
+
+        }
+
         public void ReloadForm()
         { 
             this.Controls.Clear();
-            this.InitializeComponent();
+            InitializeComponent();
+            LoadColors();
         }
 
         private void Form4_Load(object sender, EventArgs e)
@@ -71,36 +109,7 @@ namespace randomshit
                 conn.Close();
             }
 
-            Color color = config.getColorScheme();
-            Color fontColor = config.getFontColor();
-
-            guna2Button1.CheckedState.BorderColor = color;
-            guna2Button1.CheckedState.CustomBorderColor = color;
-
-            guna2Button2.CheckedState.BorderColor = color;
-            guna2Button2.CheckedState.CustomBorderColor = color;
-
-            guna2Button3.CheckedState.BorderColor = color;
-            guna2Button3.CheckedState.CustomBorderColor = color;
-
-            guna2Button8.CheckedState.BorderColor = color;
-            guna2Button8.CheckedState.CustomBorderColor = color;
-
-            updatebtn.FillColor = color;
-            updatebtn.ForeColor = fontColor;
-
-            guna2ShadowPanel8.FillColor = color;
-            guna2ShadowPanel7.FillColor = color;
-            guna2ShadowPanel4.FillColor = color;
-            guna2ShadowPanel5.FillColor = color;
-            guna2ShadowPanel3.FillColor = color;
-            guna2ShadowPanel1.FillColor = color;
-
-            label6.ForeColor = fontColor;
-            label10.ForeColor = fontColor;
-            label8.ForeColor = fontColor;
-            label3.ForeColor = fontColor;
-
+            LoadColors();
         }
 
         private void guna2Button9_Click(object sender, EventArgs e)
@@ -817,6 +826,16 @@ namespace randomshit
         }
 
         private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            label18.Text = "Date and Time: " + DateTime.Now.ToString("G");
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

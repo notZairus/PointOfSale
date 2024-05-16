@@ -236,7 +236,7 @@
             this.guna2CircleButton1.FillColor = System.Drawing.Color.Transparent;
             this.guna2CircleButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
             this.guna2CircleButton1.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButton1.Location = new System.Drawing.Point(660, -5);
+            this.guna2CircleButton1.Location = new System.Drawing.Point(664, -8);
             this.guna2CircleButton1.Name = "guna2CircleButton1";
             this.guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.guna2CircleButton1.Size = new System.Drawing.Size(42, 41);

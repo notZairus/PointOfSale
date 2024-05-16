@@ -20,6 +20,8 @@ namespace randomshit
             InitializeComponent();
         }
 
+        system_cofig config = new system_cofig();
+
         private void guna2Button6_Click(object sender, EventArgs e)
         {
             Image img = pictureBox1.Image;
@@ -86,9 +88,18 @@ namespace randomshit
         {
             if (label4.Text == "ITEM ID")
             {
-                return;
+                Color color = config.getColorScheme();
+                Color fontColor = config.getFontColor();
+
+                this.BackColor = color;
+
+                guna2Button5.FillColor = color;
+                guna2Button5.ForeColor = fontColor;
+
+                createButton.FillColor = color;
+                createButton.ForeColor = fontColor;
             }
-            else
+            /*else
             {
                 string connstring = "server=127.0.0.1; port=3306; database=pos_db; username=root; pwd=QZr8408o;";
 
@@ -114,7 +125,7 @@ namespace randomshit
                         }
                     }
                 }
-            }
+            }*/
         }
 
         public Image toImage(byte[] ImageData)
