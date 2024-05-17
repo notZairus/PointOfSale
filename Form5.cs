@@ -32,11 +32,22 @@ namespace randomshit
         private void Form5_Load(object sender, EventArgs e)
         {
             Color color = config.getColorScheme();
+            Color fontColor = config.getFontColor();
+
             this.BackColor = color;
+
             guna2Button1.FillColor = color;
+            guna2Button1.ForeColor = fontColor;
+
             guna2Button2.FillColor = color;
+            guna2Button2.ForeColor = fontColor;
+
             guna2Button3.FillColor = color;
+            guna2Button3.ForeColor = fontColor;
+
             guna2Button4.FillColor = color;
+            guna2Button4.ForeColor = fontColor;
+
         }
 
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)

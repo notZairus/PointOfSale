@@ -23,6 +23,8 @@ namespace randomshit
             InitializeComponent();
         }
 
+        int age;
+
         private void guna2Button3_Click(object sender, EventArgs e)
         {
              OpenFileDialog ofd = new OpenFileDialog();
@@ -35,7 +37,18 @@ namespace randomshit
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
+            if (guna2TextBox1.Text == "" || guna2TextBox3.Text == "" || guna2TextBox4.Text == "")
+            {
+                MessageBox.Show("Please fill out the necessary information");
+                return;
+            }
 
+            if (age < 18)
+            {
+                MessageBox.Show("Im sorry, you are too young to work.");
+                return;
+            }
+     
             if (guna2TextBox5.Text.Length < 7 || guna2TextBox6.Text.Length < 7)
             {
                 MessageBox.Show("Password must not be less than 8 characters");
@@ -81,7 +94,7 @@ namespace randomshit
                         cmd.Parameters.AddWithValue("@MiddleName", guna2TextBox2.Text);
                         cmd.Parameters.AddWithValue("@LastName", guna2TextBox3.Text);
                         cmd.Parameters.AddWithValue("@Gender", gender);
-                        cmd.Parameters.AddWithValue("@Age", guna2NumericUpDown1.Value);
+                        cmd.Parameters.AddWithValue("@Age", age);
                         cmd.Parameters.AddWithValue("@Birthday", guna2DateTimePicker1.Value.Date);
                         cmd.Parameters.AddWithValue("@userName", guna2TextBox4.Text);
                         cmd.Parameters.AddWithValue("@passWord", guna2TextBox5.Text);
@@ -94,6 +107,7 @@ namespace randomshit
                     conn.Close();
 
                     MessageBox.Show("SUCCESS!");
+                    this.Close();
                 }
             }
         }
@@ -147,15 +161,29 @@ namespace randomshit
             guna2Button1.FillColor = color;
             guna2Button1.ForeColor = fontColor;
 
-            guna2NumericUpDown1.UpDownButtonFillColor = color;
-            guna2NumericUpDown1.UpDownButtonForeColor = fontColor;
-
             guna2CircleButton1.ForeColor = fontColor;
         }
 
         private void guna2CircleButton1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void guna2DateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            age = DateTime.Today.Year - guna2DateTimePicker1.Value.Year;
+            if (guna2DateTimePicker1.Value.Month > DateTime.Today.Month)
+            {
+                age--;
+            }
+            else if (guna2DateTimePicker1.Value.Month == DateTime.Today.Month)
+            {
+                if (guna2DateTimePicker1.Value.Day > DateTime.Today.Day)
+                {
+                    age--;
+                }
+            }
+
         }
     }
 }

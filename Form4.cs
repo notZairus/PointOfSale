@@ -791,6 +791,15 @@ namespace randomshit
             colorDialog1.ShowDialog();
             guna2Button10.FillColor = colorDialog1.Color;
             guna2Button10.Tag = getLuminance(colorDialog1.Color);
+
+            String fontColorr = (double)guna2Button10.Tag > 0.6 ? "202020" : "White";
+            ColorConverter cconverter = new ColorConverter();
+
+            guna2Panel2.Visible = true;
+            guna2Panel2.FillColor = colorDialog1.Color;
+
+            label19.Visible = true;
+            label19.ForeColor = (Color)cconverter.ConvertFromString(fontColorr);
         }
 
         private double getLuminance(Color color)
@@ -804,24 +813,42 @@ namespace randomshit
 
         private void guna2Button11_Click(object sender, EventArgs e)
         {
-            using (MySqlConnection conn = new MySqlConnection(connstring))
+            if (config.getColorScheme() != guna2Button10.FillColor)
             {
-                conn.Open();
-
-                using (MySqlCommand cmd = new MySqlCommand("UPDATE system_config SET ColorScheme = @ColorScheme, StoreName = @StoreName, FontColor = @FontColor", conn))
+                using (MySqlConnection conn = new MySqlConnection(connstring))
                 {
-                    String fontColor = (double)guna2Button10.Tag > 0.53 ? "272727" : "White";
+                    conn.Open();
 
-                    cmd.Parameters.AddWithValue("@ColorScheme", guna2Button10.FillColor.ToArgb().ToString());
-                    cmd.Parameters.AddWithValue("@FontColor", fontColor);
-                    cmd.Parameters.AddWithValue("@StoreName", guna2TextBox1.Text);
-                    cmd.ExecuteNonQuery();
+                    using (MySqlCommand cmd = new MySqlCommand("UPDATE system_config SET ColorScheme = @ColorScheme, FontColor = @FontColor", conn))
+                    {
+                        String fontColorr = (double)guna2Button10.Tag > 0.6 ? "202020" : "White";
+
+                        cmd.Parameters.AddWithValue("@ColorScheme", guna2Button10.FillColor.ToArgb().ToString());
+                        cmd.Parameters.AddWithValue("@FontColor", fontColorr);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    conn.Close();
                 }
-
-                MessageBox.Show("Configuration Saved!");
-                conn.Close();
             }
 
+            if (config.getStoreName() != guna2TextBox1.Text)
+            {
+                using (MySqlConnection conn = new MySqlConnection(connstring))
+                {
+                    conn.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand("UPDATE system_config SET StoreName = @StoreName", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@StoreName", guna2TextBox1.Text);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    conn.Close();
+                }
+            }
+
+            MessageBox.Show("Configuration Saved!");
             Application.Restart();
         }
 
@@ -836,6 +863,11 @@ namespace randomshit
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

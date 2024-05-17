@@ -140,6 +140,12 @@ namespace randomshit
 
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
+                        if (!reader.HasRows)
+                        {
+                            MessageBox.Show("Username isn't found.");
+                            return;
+                        }
+
                         while (reader.Read())
                         {
                             int uid = reader.GetInt32("UID");
